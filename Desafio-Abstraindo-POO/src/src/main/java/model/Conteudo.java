@@ -1,6 +1,8 @@
 package model;
 
-public class Conteudo {
+import service.ICalcularXP;
+
+public class Conteudo implements ICalcularXP {
     protected String titulo;
     protected String descricao;
     protected static final double XP_PADRAO = 10d;
@@ -24,5 +26,11 @@ public class Conteudo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+
+    @Override
+    public double calcularXP() {
+        return XP_PADRAO + 20d;
     }
 }

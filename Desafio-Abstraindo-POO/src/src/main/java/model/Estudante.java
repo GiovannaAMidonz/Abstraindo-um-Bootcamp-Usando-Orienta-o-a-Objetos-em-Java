@@ -1,6 +1,8 @@
 package model;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 public class Estudante {
@@ -17,6 +19,28 @@ public class Estudante {
         contador++;
     }
 
+    public void inscreverBootcamp(Bootcamp bootcamp){
+        this.conteudosConcluidos.addAll(bootcamp.getConteudos());
+        bootcamp.getAlunosInscritos().add(this);
+
+    }
+
+    public void progredir(){
+        Optional<Conteudo> conteudo = this.conteudosInscrito.stream().findFirst();
+        if (conteudo.isPresent()){
+            this.conteudosConcluidos.add(conteudo.get());
+            this.conteudosInscrito.remove(conteudo.get());
+        }else{
+            System.err.println("Você não está matriculado!");
+        }
+    }
+
+    public double calcularTotalXP(){
+        return this.conteudosConcluidos
+                .stream()
+                .mapToDouble(Conteudo::calcularXP)
+                .sum();
+    }
 
 
     public String getNome() {
@@ -51,5 +75,15 @@ public class Estudante {
         this.conteudosConcluidos = conteudosConcluidos;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Estudante estudante = (Estudante) o;
+        return ID == estudante.ID && Objects.equals(nome, estudante.nome) && Objects.equals(conteudosInscrito, estudante.conteudosInscrito) && Objects.equals(conteudosConcluidos, estudante.conteudosConcluidos);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, ID, conteudosInscrito, conteudosConcluidos);
+    }
 }
