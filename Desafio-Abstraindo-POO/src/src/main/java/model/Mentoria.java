@@ -16,6 +16,15 @@ public class Mentoria extends Conteudo implements ICalcularXP {
     }
 
     @Override
+    public String toString() {
+        return "Mentoria{" +
+                "date=" + date +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
+
+    @Override
     public double calcularXP() {
         return XP_PADRAO + 20d;
     }

@@ -20,6 +20,15 @@ public class Curso  extends Conteudo implements ICalcularXP {
     }
 
     @Override
+    public String toString() {
+        return "Curso{" +
+                "cargaHoraria=" + cargaHoraria +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
+
+    @Override
     public double calcularXP() {
         return XP_PADRAO * cargaHoraria;
     }
