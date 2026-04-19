@@ -17,27 +17,32 @@ Este projeto faz parte da formação **Java & QA da DIO**. O objetivo principal 
 
 ---
 
-## 🛠️ Pilares da POO Implementados
-Para que o sistema fosse funcional e escalável, utilizei os 4 pilares fundamentais:
+## 🚀 Diferenciais e Decisões de Arquitetura
 
-* **Abstração:** Criação da classe base `Conteudo`, servindo de modelo para qualquer tipo de material didático.
-* **Encapsulamento:** Uso de modificadores de acesso `private` e métodos `getters/setters` para proteger a lógica de negócio.
-* **Herança:** As classes `Curso` e `Mentoria` herdam atributos e métodos comuns de `Conteudo`, evitando repetição de código.
-* **Polimorfismo:** Implementação do método `calcularXp()`, onde cada tipo de conteúdo gera uma pontuação diferente para o desenvolvedor.
+Neste projeto, busquei ir além da implementação básica, aplicando conceitos avançados de Java para garantir um sistema robusto, organizado e testável. Abaixo destaco as principais escolhas técnicas:
+
+### 🛠️ Modelagem com Classes Abstratas e Interfaces
+Para garantir a escalabilidade do projeto e evitar a repetição de código (princípio DRY - *Don't Repeat Yourself*):
+- **Classe Abstrata `Conteudo`:** Utilizada como base para todos os tipos de conhecimento (Cursos e Mentorias). Ela define o comportamento essencial, mas impede que a classe mãe seja instanciada sozinha.
+- **Interface de Comportamento:** Implementação de contratos para métodos como `calcularXp()`. Isso separa o que o objeto **é** (Herança) do que o objeto **faz** (Interface), permitindo que diferentes tipos de conteúdos tenham lógicas de pontuação específicas.
+
+### 📅 Manipulação Moderna de Datas com `LocalDate`
+Diferente das implementações antigas (`Date` ou `Calendar`), utilizei a API **`java.time.LocalDate`**:
+- Garante imutabilidade e thread-safety.
+- Facilita a gestão de eventos com data marcada (Mentorias).
+- Segue o padrão internacional ISO-8601, essencial para futuras integrações e testes de QA.
+
+### ⛓️ Gestão de Coleções com `LinkedHashSet`
+A escolha do **`LinkedHashSet`** para gerenciar os conteúdos do Bootcamp e os Devs inscritos foi estratégica:
+- **Unicidade:** Como um `Set`, ele impede que um aluno se inscreva duas vezes no mesmo curso ou que conteúdos sejam duplicados.
+- **Previsibilidade:** Diferente do `HashSet` comum, ele preserva a **ordem de inserção**, garantindo que a trilha do Bootcamp seja exibida para o usuário na sequência lógica em que foi criada.
+
+| Coleção | Evita Duplicatas? | Mantém Ordem? | Motivo da Escolha |
+| :--- | :---: | :---: | :--- |
+| **LinkedHashSet** | ✅ Sim | ✅ Sim | Ideal para trilhas de aprendizado ordenadas e sem repetições. |
 
 ---
 
-## 🏗️ Modelagem do Domínio
-O sistema foi construído com as seguintes entidades principais:
-
-| Classe | Descrição |
-| :--- | :--- |
-| **Bootcamp** | Gerencia os conteúdos, os desenvolvedores inscritos e as datas do evento. |
-| **Dev** | Representa o usuário que se inscreve, progride nos conteúdos e acumula XP. |
-| **Curso** | Possui carga horária e é um tipo de conteúdo. |
-| **Mentoria** | Possui data e hora, focada em networking e suporte. |
-
----
 
 ## 🚀 Como Visualizar
 1.  **Clone o projeto:**
