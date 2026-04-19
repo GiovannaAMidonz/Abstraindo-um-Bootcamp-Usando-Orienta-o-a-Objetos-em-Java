@@ -13,8 +13,7 @@ public class Estudante {
     protected Set<Conteudo> conteudosInscrito = new LinkedHashSet<>();
     protected Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
 
-    public Estudante(String nome, int ID) {
-        this.nome = nome;
+    public Estudante( int ID) {
         this.ID = contador;
         contador++;
     }
